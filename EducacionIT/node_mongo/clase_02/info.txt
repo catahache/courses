@@ -1,0 +1,27 @@
+BUNDLERS - TRANSPILADORES (transforman nuevo js a viejo)
+
+websocket protocolo tipo http que te permite mandar cosas entre 2 maquinas, pero las conexiones quedan abiertas, no como en http que se cierran
+
+NODEMON : restartea el server cuando hay cambios en el codigo para no hacer el down-up manual
+
+Express tiene la capacidad de enviar archivos, nativo de node podias hacerlo con el modulo fs (mas complejo)
+
+servidor.on("request", (req, res)=>{
+    req.on("")
+})
+
+callback -> una fx que ejecutas despues de que algo paso. en js frontend se ve mucho con eventos, luego de un click, ejecutamos una funcion callback. tmb podes hacer pedidos a un servidor con ajax por ej, cuando ajax termina de hacer el pedido al server y vuelve, podes ejecutar el callback y hacer algo al respecto con esa info que devolvio.
+
+middleware -> fx antes de que algo haya pasado
+
+
+MIME-TYPE
+application/x-www-form-urlencoded
+query String
+url string
+nombre=horacio&edad=31
+
+Handlebars
+
+//REGEX = patrones de strings, por lo gral de busqueda, validacion
+const regex = /a/

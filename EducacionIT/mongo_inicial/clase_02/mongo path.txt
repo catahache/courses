@@ -1,0 +1,1 @@
+mongod --dbpath "C:\Users\hered\OneDrive\Escritorio\Cursos\EducacionIT\mongo_inicial\clase_02\mongoBase"

@@ -1,0 +1,49 @@
+URL : (o uri)
+
+<protocolo> -> http, https, ftp, ssh, ws,
+<dominio [+tld] / ip> -> www, ...
+[puerto] -> opcional en tanto y en cuanto te mantengas en el puerto standard de ese protocolo
+[<ruta>] -> opcional, son los directorios, pero nosotros encubrimos los directorios con rutas
+[<anclas>] -> opcional, etiqueta a, te genera etiqueta con link
+[parametros] -> opcional, application/www-x-.. por ej (/search?q=rick+and+morty)
+
+MVC : Model View Controller
+    -Vistas: todo lo que hace algo relacionado al renderizado 
+    -Modelo: archivos que usa el servidor pero donde se definen modelos. Tecnicamente un modelo es la repres de algo que esta en una db en forma de clase. En js no lo podemos hacer en forma de clases, pero si de objetos
+    -Controlador: Toda la logica. Entras en el controlador a traves de las rutas. Dentro del cada controlador consultas un modelo o mostras una vista, una de dos.
+    -Ruta: determina a que controller vas a ir
+
+
+OBJECT SHORTHAND:
+{x:x} = {x}
+
+
+MONGODB:
+mongo: ejecutable de cliente shell
+mongod: ejecutable de servidor(daemon) - levanta todo en (default) root/data/db
+
+DB = DB
+TABLAS = COLLECTION -> casi analogas a una carpeta
+COLUMNAS = PROPIEDADES
+REGISTRO = DOCUMENTOS
+
+BSON (formato que elije este tipo de db para almacenar la info en el disco duro)
+
+
+ECMASCRIPT:
+
+    - var - let - const
+    - tipos de datos
+    - flujos de datos (while, for, switch, etc)
+    - objeto global -> el obj global el frontend es window
+
+EXTENDED JSON: Es JSON pero con capacidad para expresar mas tipos de datos
+
+JSON: formato de archivo (string - number - boolean - array - object)
+
+show dbs: Muestra listado de dbs
+show collections: Muestra listado de collections
+use <db> : Nos mueve el puntero RAM a una base de datos
+db.<collection>.insert(<document>) : Crea un nuevo documento en una collection
+db.<collection>.find() : SELECT * FROM <collection>
+db.<collection>.find() : 

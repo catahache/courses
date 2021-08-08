@@ -1,0 +1,11 @@
+MongoClient.connect("mongodb://127.0.0.1:27017",{useUnifiedTopology : true}, (err, client) => {
+  if (err) {
+    throw new Error(err); // arrojo el error
+  }
+  console.log("Cliente DB conectado en 270127")
+  // client tmb es MongoClient!!! pero esta YA ESTA CONECTADO A LA DB, con lo cual, lo que haga con esta variable afecta a mi db
+  // client.db() Mueve el pontero de memoria a una base de datos virtual
+  const db = client.db("test_base"); 
+  const usuarios = db.collection("usuarios");
+
+}); // al hacer mongo en la consola sale el puerto

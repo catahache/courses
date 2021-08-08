@@ -1,0 +1,92 @@
+SEGURIDAD
+
+Encriptacion:
+    a) Simetrica
+        A ---> ALGO:KEY --- TXT_CIFRADO ----> B ---> ALGO:KEY   TXT_ORIGINAL
+        A <-------------------------------------------------------------- B
+                                man in the middle
+  
+    b) Asimetrica inventada en 1967 (Era computacional)
+        Red ip puede ser interceptado el mensaje
+        Maquinas son rapidas
+
+        Encriptar con una clave y desencriptar con otra
+        Puedo deducir una clave teniendo la otra? SI pero lleva mucho tiempo
+        Clave publica y privada, se cambian una vez al anio
+    
+    c) Checksum una vez encriptado NO se puede desencriptar
+        es una funcion sobreyectiva donde infinitos inputs potencialmente dan el mismo output
+
+        Suponiendo que mi password es andy72Patronesynode --> 39187c494de1bf17d2319e811bbff50d14982f73edfc1968a31f5f5e0d17b31
+
+        Passwords
+        Arquitecturas inmutables Kafka, Git, Bitcoin, Etherium, blockchain (todo fue basado en git, que fue el pionero en esto)
+
+        Leyes, fallos judiciales, contabilidad
+
+
+HTTP Headers:
+
+    Mecanismo de autenticacion
+
+        a) Usuario y password
+        b) Token expedido por el sistema
+
+    Como se envia el usuario y password
+    base64(usu:pass)
+
+    Que es base 64: asi como tenemos una base 2 (binario), tenemos base 10 (decimal), base 16 (hexad), tenemos la base 64 con 64 posibles digitos
+
+    Browser/Programa -------------------|------ Servicio
+                              HTTPS       HTTP
+
+    La idea es que el usuario y la password se coloque lo menos frecuente posible
+    En el banco central esto NO es posible. El BCRA exige autenticacion por usuario y password.
+
+    Para esto, existe un mecanismo donde el usuario se loguea cono usuario y password y el autorization server le entrega un token. Con ese token puedo re-autenticarme como mi persona.
+
+    Hay bastantes estrategias para administrar token
+
+    Un token por anio, que se renueva, spotify, netflix.
+    Un token que dura 15 minutos, pero poseo un refresh token que lo envio y me da otro token que dura 15 minutos. El refresh token dura uno o dos anios
+
+    Hay muchas variantes de esto
+    
+    Por cada request, te envia el siguiente token que tenes que usar. Medio paranoide
+
+    Tenemos 
+    a) tokens que se guardan en base de datos
+    b) tokens que se autovalidan (Json Web Token)
+    c) Mix donde para validar un JWT tengo que ir a una base de datos
+
+    Los headers de http son ASCII por definicion; dicho esto, siempre voy a poder ver la password. Ahroa bien, de punta a punta va encriptado por HTTPS Clave Publica Privada + Encriptacion simetrica.
+
+    En algun punto el https pasa a texto plano
+
+
+
+    Con respecto al guardado de la password la idea es usar sha2()
+
+    Que es una funcion sobreyectiva?? 2 + 2 = 4
+                                      3 + 1 = 4
+                                      -1 + 5 = 4
+
+    Si me armo un diccionario de todos los md5 de una cantidad de palabras puedo dar vuelta la password, lo que me dice es que cuanto mas larga la password mas dificil es darla vuelta. 
+
+    Por mas que la password sea hola si le concateno 'hola' + 'asdsdfasdlcgh' no me la van a poder dar vuelta
+
+    'hola' + 'asdsdfasdlcgh'
+     Pass     Salt
+
+
+     bcrypt es un algoritmo, que ya tiene un sistema de salt incluido. Lo que tiene es que la ventaja es que es mas inmune a la fuerza bruta, esto quiere decir que las placas de video que se usan para altos niveles de procecsamiento (mineria de bitcoin etc) les cuesta mucho mas este algoritmo y las hace mas lentas. El sha2 es rapidisimo.
+
+
+     Ejercicio:
+
+     Hacer un servidorcito en express
+     Hacer un app.get('/'), (req, res) => {
+         Vamos a tomar el header "Authorization".
+         Hacerle bas64 a Textoplano -> ahi vamos a ver usu:pass
+         res.send('gracias')
+     })

@@ -1,0 +1,115 @@
+show dbs: Muestra listado de dbs
+show collections: Muestra listado de collections
+use <db> : Nos mueve el puntero RAM a una base de datos
+db.<collection>.insert(<document>) : Crea un nuevo documento en una collection
+db.<collection>.find() : SELECT * FROM <collection>
+db.<collection>.find(<query>, <projection>) 
+
+db.usuarios.find({})
+
+
+OPERADORES
+https://docs.mongodb.com/manual/reference/operator/
+
+documento -> es lo mismo que objeto
+
+db.usuarios.find({ nombre : "Horacio" }) : SELECT * FROM usuarios WHERE nombre = "Horacio"
+es igual a :
+db.usuarios.find({ nombre : { $eq : "Horacio"} })
+
+optimizacion de queries en mongodb para agilizar el servidor 
+
+db.usuarios.find({ nombre : "Horacio", edad : 31 }) : SELECT * FROM usuarios WHERE nombre = "Horacio" AND edad = 31
+es igual a :
+db.usuarios.find({ $and : [ {nombre : "Horacio"}, {edad : 31} ] })
+
+
+db.usuarios.find({} , {nombre:1}) // de los registros mostrame SOLO la propiedad nombre : SELECT nombre.edad FROM usuarios
+db.usuarios.find({} , {nombre:0}) // de los registros mostrame TODO MENOS la propiedad nombre
+
+UPDATE usuarios SET nombre = "Horacio"
+db.usuarios.update(<query>, <update>, <config>) -> reemplaza 
+
+CAPPED COLLECTION : db.createCollection("logger",{capped:true, max:400}) // ANTES
+AHORA: 
+db.createCollection( <name>,
+   {
+     capped: <boolean>,
+     autoIndexId: <boolean>,
+     size: <number>,
+     max: <number>,
+     storageEngine: <document>,
+     validator: <document>,
+     validationLevel: <string>,
+     validationAction: <string>,
+     indexOptionDefaults: <document>,
+     viewOn: <string>,              // Added in MongoDB 3.4
+     pipeline: <pipeline>,          // Added in MongoDB 3.4
+     collation: <document>,         // Added in MongoDB 3.4
+     writeConcern: <document>
+   }
+)
+db.createCollection("logger",{validator: })
+
+DELETE
+db.usuarios.deleteOne({}) // borra el 1ro
+db.usuarios.deleteMany({}) // borra el todos
+db.usuarios.deleteOne({ x : 1 }) // borra el primer usuario en el que la prop x sea 1
+db.usuarios.deleteMany({ x : 1 }) // borra todos los usuarios en el que la prop x sea 1
+
+
+SET : cambia el valor de la prop si existe y sino la crea
+
+
+NOTACION PUNTO / NOTACION DE CORCHETE
+
+var nombre = "edad"
+var persona = {nombre:"Horacio"}
+
+LECTURA
+persona.nombre
+persona["nombre"]
+persona[nombre]
+persona[0]
+
+ESCRITURA
+persona.edad = 31
+persona["vive"] = true // si no existe la propiedad, la crea
+persona[vive] = true // si no existe  la propiedad, falla
+persona[0] = "valor"
+
+
+var arr = [1,2,3,4]
+for(var i = 0 ...){
+    arr.i -> no funciona!! porque busca literalmente la propiedad i
+    arr[i] -> esta si!
+}
+
+
+
+DRIVER OFICIAL  MongoDB
+MONGOOSE (ORM)
+
+Model : simil referencia a una collection
+Schema : Definicion de cmapos de documentos de una collection (Model)
+
+
+
+callbacks:
+
+    operacion((err, data) => {})
+
+    operacion()
+        .then((data)=>{
+            console.log(data)
+        })
+        .catch(()=>{})
+
+
+
+async / await:
+
+    const data = operacion()
+    console.log(data)
+
+Con mongoose en la conexion no obtenemos un cliente, sino una promesa de conexion, no necesitamos acceso a la variable de cliente
